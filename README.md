@@ -26,5 +26,5 @@ Los pasos que se deben serguir son:
         * Instala el módulo pymssql 
             > pip install pymssql‑2.1.3‑cp36‑cp36m‑win_amd64.whl
 
-[](https://raw.githubusercontent.com/ivansaldivar/Python---SQLServer/master/conectando_python_con_sqlserver.png)
+![](https://raw.githubusercontent.com/ivansaldivar/Python---SQLServer/master/conectando_python_con_sqlserver.png)
 

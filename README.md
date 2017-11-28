@@ -28,3 +28,61 @@ Los pasos que se deben serguir son:
 
 ![](https://raw.githubusercontent.com/ivansaldivar/Python---SQLServer/master/conectando_python_con_sqlserver.png)
 
+
+# Prueba de concepto conectando a SQL usando pymssql
+
+Paso 1: conecta
+La función pymssql.connect se usa para conectarse a la base de datos SQL.
+        
+    - PYTHON
+        import pymssql  
+        conn = pymssql.connect(
+                server='DAVINCI_DAEMOND\SAURON', 
+                user='sa', 
+                password='paulina', 
+                database='PEGAXUS_DB_MASTER')  
+        
+
+Paso 2: ejecutar la consulta
+La función cursor.execute se puede usar para recuperar un conjunto de resultados de una consulta en una base de datos SQL. Esta función acepta esencialmente cualquier consulta y devuelve un conjunto de resultados que puede iterarse con el uso de cursor.fetchone ().
+
+    - PYTHON
+        import pymssql  
+        conn = pymssql.connect(
+                server='DAVINCI_DAEMOND\SAURON', 
+                user='sa', 
+                password='paulina', 
+                database='PEGAXUS_DB_MASTER') 
+
+        cursor = conn.cursor()  
+        cursor.execute('SELECT ID_COMUNA, DESCRIPCION FROM PEGAXUS_COMUNAS_PROVINCIAS ORDER BY DESCRIPCION;')  
+        row = cursor.fetchone()  
+        i = 1
+        while row:  
+            print( str(i) + " - " + str(row[0]) + " " + str(row[1])  )
+            row = cursor.fetchone()  
+            i = i + 1
+            
+        cursor.close()
+        conn.close()    
+        
+Paso 3: inserta una fila
+En este ejemplo, verá cómo ejecutar una instrucción INSERT de forma segura, pasar parámetros que protegen su aplicación del valor de inyección de SQL.
+
+    - PYTHON
+        import pymssql  
+        conn = pymssql.connect(
+                server='DAVINCI_DAEMOND\SAURON', 
+                user='sa', 
+                password='paulina', 
+                database='PEGAXUS_DB_MASTER') 
+
+        cursor = conn.cursor()  
+        cursor.execute("INSERT PEGAXUS_DB_MASTER.PEGAXUS_COMUNAS_PROVINCIAS (ID_COMUNA, DESCRIPCION) OUTPUT INSERTED.ID_COMUNA VALUES ('99999', 'MI COMUNA')")  
+        
+        row = cursor.fetchone()  
+        while row:  
+                print "Inserted ID_COMUNA : " +str(row[0])  
+                row = cursor.fetchone()  
+        conn.commit()
+        conn.close()

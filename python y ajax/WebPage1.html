@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Ejemplo AJAX y Python</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <script>
+        function asyncChange() {
+            var request;
+
+            if (window.XMLHttpRequest) {
+                request = new window.XMLHttpRequest();
+            } else {
+                request = new window.ActiveXObject("Microsoft.XMLHTTP");
+            }
+
+            request.open("GET", "module1.py", true);
+            request.send();
+
+            request.onreadystatechange = function () {
+                if (request.readyState == 4 && request.status == 200) {
+                    //alert(request.responseText);
+                    document.getElementById("myLabel").innerHTML = request.responseText;
+                }
+            }
+        }
+        function Limpiar() {
+            document.getElementById("myLabel").innerHTML = "AQU&iacute; SE CARGA LA DATA USANDO SCRIPT Python!";
+        }
+    </script>
+</head>
+<body>
+    <button onclick="javascript:asyncChange();">Clic para cargar datos</button>
+    <button onclick="javascript:Limpiar();">Limpiar carga datos</button>
+    <br />
+    <label id="myLabel">AQU&iacute; SE CARGA LA DATA USANDO SCRIPT Python!</label>
+    
+</body>
+</html>

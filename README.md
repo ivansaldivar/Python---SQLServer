@@ -1,4 +1,4 @@
-# Jugando con Python - Playing with Python
+# Probando Python con SQLServer
 
 
 Este fue mi primer acercamiento a Python. Y me asombró su versatilidad, en una tarde probé un conjunto de características 
